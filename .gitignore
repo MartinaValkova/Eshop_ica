@@ -122,6 +122,8 @@ venv
 /site
 
 # mypy
+__pycache__
+__pyhe__
 .mypy_cache/
 .dmypy.json
 dmypy.json
