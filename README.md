@@ -33,6 +33,12 @@ Then install the dependencies:
 (env)$ pip install -r requirements.txt
 Note the (env) in front of the prompt. This indicates that this terminal session operates in a virtual environment set up by virtualenv2.
 
+Every Django project has a unique secret key. The secret is not exposed online. You have to generate a new one for your project to run. Create a new secret key with a secret key generator, like Djecrety.
+
+Make your migrations:
+$ python manage.py makemigrations
+$ python manage.py migrate
+
 Once pip has finished downloading the dependencies:
 
 (env)$ cd project
