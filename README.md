@@ -23,29 +23,41 @@ How to Install and Run the Project:
 The first thing to do is to clone the repository
 
 $ git clone https://github.com/MartinaValkova/Eshop_ica.git
-$ cd Eshop
-Create a virtual environment to install dependencies in and activate it:
+$ cd Eshop_ica
 
-$ virtualenv2 --no-site-packages env
+Create a virtual environment to install dependencies in and activate it:
+ 
+
+On Mac:
+
+$ python3 -m venv venv
 $ source env/bin/activate
+$ cd Eshop
+
+On Windows:
+
+$ python3 -m venv venv
+$ .\venv\Scripts\activate
+$ cd Eshop
+
+
+
 Then install the dependencies:
 
-(env)$ pip install -r requirements.txt
+(env)$ pip install -r requirement.txt
 Note the (env) in front of the prompt. This indicates that this terminal session operates in a virtual environment set up by virtualenv2.
 
-Every Django project has a unique secret key. The secret is not exposed online. You have to generate a new one for your project to run. Create a new secret key with a secret key generator, like Djecrety.
+Every Django project has a unique secret key. The secret is not exposed online. Ask for the secret key.
 
-Make your migrations:
+Make your migrations if some:
 $ python manage.py makemigrations
 $ python manage.py migrate
 
 Once pip has finished downloading the dependencies:
 
-(env)$ cd project
 (env)$ python manage.py runserver
-And navigate to http://127.0.0.1:8000/ 
+And navigate to http://127.0.0.1:8000/?page=1 
 
-In order to test the purchase flows, fill in the account details in project/gc_app/views.py to match your SANDBOX developer credentials.
 
 
 
