@@ -2,16 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://unpkg.com//tailwindcss@2.1.1/dist/tailwind.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href ="{% static  'shop/style.css' %}"> 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-      crossorigin="anonymous"></script>
-     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>   
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+      
+    <script   src="https://code.jquery.com/jquery-3.6.4.js"   integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="   crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href ="{% static  'shop/style.css' %}">
 
     <title>Document</title>
 
@@ -20,6 +22,7 @@
     
 
 <!--Creating the Navbar and displaying number of items on Navbar-->
+<div class="container">
 <div class="row">
     <div class="col-md-12">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -30,10 +33,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
             <button id="cart" data-html="true" type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
@@ -41,9 +41,11 @@
               Cart(0)
             </button>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
+      
+        <li class="nav-item active ">
+            <a class="nav-link" href="/contact">Contact</a>
+          </li>
+       
     </ul>
     {% if user.is_authenticated %}
     <a class="text-white" href="/logout">Logout</a>
@@ -61,14 +63,78 @@
 
 </div>
 
-
+</div>
 
 {% block body %}
 
 {% endblock %}
 
 </body>
-</html> 
+
+<!--Creating the cart and using local storage to save cart  -->
+<script type="text/javascript">
+    console.log('This is working');
+
+    if(localStorage.getItem('cart')==null){
+        var cart = {};
+    }
+    else{
+        cart = JSON.parse(localStorage.getItem('cart'));
+
+    }
+
+    $(document).on('click','.atc',function(){
+           console.log("The add to cart button is clicked");
+           var item_id = this.id.toString();
+           console.log(item_id);
+
+           if(cart[item_id]!=undefined){
+            quantity = cart[item_id][0] + 1;
+            cart[item_id][0] = quantity;
+            
+
+
+           }
+           else{
+            quantity = 1;
+            name = document.getElementById("nm"+ item_id).innerHTML;
+            cart[item_id] = [quantity, name];
+
+
+
+
+
+           }
+           console.log(cart);
+           localStorage.setItem('cart',JSON.stringify(cart));
+           document.getElementsById("cart").innerHTML = "Cart("+ Object.keys(cart).lenght +")";
+
+
+
+       });
+       
+       DisplayCart(cart);
+       function DisplayCart(cart){
+        var cartString ="";
+        cartString += "<h5>This is your cart</h5>";
+        var cartIndex = 1;
+        for(var x in cart){
+            cartString += cartIndex;
+            cartString += document.getElementById("nm"+x).innerHTML + "Qty" + cart[x][0] + "</br> ";
+            cartIndex += 1;
+        }
+        
+        cartString += "<a href='/checkout'><button class='btn btn-warning' id= 'checkout'>Checkout</button></a>";
+        document.getElementById("cart").setAttribute('data-content', cartString);
+        $('[data-toggle="popover"]').popover();
+
+
+       }
+
+</script>
+
+</html>
+
 
 
 
