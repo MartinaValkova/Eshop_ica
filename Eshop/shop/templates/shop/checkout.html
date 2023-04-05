@@ -1,3 +1,5 @@
+{% extends 'shop/base.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +13,7 @@
 </head>
 <body>
 
+    {% block body %}
 
     <div class="container">
         <div class="row m-5">
@@ -85,6 +88,7 @@
      
             </div>
         </div>
+        {% endblock %}
     </body>
 
 
