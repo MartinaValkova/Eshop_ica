@@ -1,22 +1,21 @@
-{% load static %}
-
+{% extends 'shop/base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
 
-
-    <link rel="stylesheet" href ="{% static  'shop/style.css' %}">
+    
+   
     <title>Document</title>
 </head>
+
+
 <body>
-     <div class="container">
+   
+{% block body %}
 
 <!--Adding Search Functionality -->
+<div class="container">
         <div class ="row">
             <div class="col-md-12">
                 <form class="card card-sm">
@@ -42,6 +41,7 @@
             <div class="card">
                 <img src="{{product.image}}" class="card-img-top">
                 <div class="card-body">
+<<<<<<< HEAD
                     <div class="card-title">
                         {{ product.title }}
                    </div>
@@ -49,8 +49,13 @@
                     $ {{product.price}}
                     </div>
 <!--Adding btn viex and Add to cart -->
+=======
+                    <div id="nm{{product.id}}" class="card-title">{{ product.title }}</div>
+                   <div id="price{{product.id}}" class="card-text">{{product.price}}</div>
+
+>>>>>>> Test
                     <a href="/{{product.id}}" class="btn btn-warning">View</a>
-                    <a class="btn btn-warning">Add to cart</a>
+                    <button id="{{product.id}}" class="btn atc btn-warning">Add to cart</button>
 
                 </div>
             </div>
@@ -82,6 +87,8 @@
              </ul>
        </div>
   </div>
-
+  {% endblock %}
 </body>
+
+
 </html>
