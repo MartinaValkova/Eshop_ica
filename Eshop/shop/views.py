@@ -23,7 +23,7 @@ def detail(request,id):
     return render(request,'shop/detail.html',{'product_object':product_object})
 
    # Checkout 
-
+# @login-required
 def checkout(request):
 
     if request.method =="POST":
