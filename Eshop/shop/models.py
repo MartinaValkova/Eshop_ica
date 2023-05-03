@@ -23,4 +23,5 @@ class Order(models.Model):
     zipcode = models.CharField(max_length=200)
     region = models.CharField(max_length=200)
     total = models.CharField(max_length=200)
+    
 
