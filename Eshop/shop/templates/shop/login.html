@@ -1,8 +1,9 @@
 {% extends 'shop/base.html' %}
 {% block body %}
 
+
 <div class="flex flex-col justify-center items-center min-h-screen">
-    <h1 class="font-weight-bold">🔐 Login</h1>
+    <h1 class="font-weight-bold">Login 🔐</h1>
     <form class="shadow-lg p-10" method="POST">
         {% csrf_token %}
         <div class="mb-2">
@@ -20,7 +21,8 @@
         <button class="bg-green-500 text-black px-4 py-2" type="submit">Login</button>
     </form>
     <p class="m-10"> New to the website? <span> <a class="text-indigo-500" href="{% url 'register' %}">Click here</a> to register</p></span>
-
+    
 </div>
 
 {% endblock %}
+

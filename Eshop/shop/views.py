@@ -3,6 +3,7 @@ from .models import Product, Order
 from django.core.paginator import Paginator
 from .forms import UserRegistrationForm
 
+
 # Create your views here.
 
 
@@ -60,3 +61,7 @@ def register(request):
         return redirect('index')
     user_form = UserRegistrationForm()
     return render(request, 'shop/register.html', {'user_form': user_form})
+
+
+def contact(request):
+    return render(request, 'contact.html')
