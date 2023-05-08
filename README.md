@@ -31,7 +31,7 @@ Create a virtual environment to install dependencies in and activate it:
 On Mac:
 
 $ python -m venv venv
-$ source env/bin/activate
+$ source venv/bin/activate
 $ cd Eshop
 
 On Windows:
