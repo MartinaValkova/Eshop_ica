@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Product, Order
 from django.core.paginator import Paginator
 from .forms import UserRegistrationForm
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -28,10 +29,11 @@ def detail(request, id):
     product_object = Product.objects.get(id=id)
     return render(request, 'shop/detail.html', {'product_object': product_object})
 
+  
    # Checkout
-# @login-required
 
 
+@login_required
 def checkout(request):
 
     if request.method == "POST":
