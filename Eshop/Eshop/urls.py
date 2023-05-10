@@ -27,5 +27,7 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('logout/', auth_views.LogoutView.as_view(template_name='shop/logout.html'), name='logout'),
     path('contact/', views.contact, name='contact'),
+    path('terms/', auth_views.LogoutView.as_view(template_name='shop/terms.html'), name='terms'),
+
 
 ]
