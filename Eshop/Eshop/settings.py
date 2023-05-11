@@ -54,6 +54,11 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+
+
+SECURE_SSL_REDIRECT = False 
+
+
 ROOT_URLCONF = "Eshop.urls"
 
 TEMPLATES = [
