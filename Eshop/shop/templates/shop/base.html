@@ -1,17 +1,14 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+  {% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="{% static 'shop/style.css' %}">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link href="https://unpkg.com//tailwindcss@2.1.1/dist/tailwind.min.css" rel="stylesheet" />
-  
-  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
- 
+    <link rel="stylesheet" href="{% static 'shop/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://unpkg.com//tailwindcss@2.1.1/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.6.4.js"   integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="   crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>   
 
@@ -168,9 +165,10 @@
   $('#items').val(JSON.stringify(cart));
 
 
-  //code to delete item from cart
  
-  $(document).on("click", ".dfc", function () {
+//code to delete item from cart
+ 
+$(document).on("click", ".dfc", function () {
       console.log("The delete from cart button is clicked");
       var item_id = this.id.toString();
       console.log(item_id);
@@ -181,19 +179,28 @@
         cart[item_id][2] =
           cart[item_id][2] -
           parseFloat(document.getElementById("price" + item_id).innerHTML);
+          //check if count is zero and remove element if it is.
+          if(cart[item_id][0]===0){
+            console.log('Count reached zero')
+            delete cart[item_id]
+ 
+            //update the cart count on the button
+              localStorage.setItem("cart", JSON.stringify(cart));
+      document.getElementById("cart").innerHTML =
+        "Cart(" + Object.keys(cart).length + ")";
+            //update the cart count on the button
+          }
+          //check if count is zero and remove element if it is.
+ 
+ 
       } 
       console.log(cart);
       localStorage.setItem("cart", JSON.stringify(cart));
       document.getElementById("cart").innerHTML =
         "Cart(" + Object.keys(cart).length + ")";
-   
- 
     });
  
     //code to delete item from cart
-  
-
-
 
 </script>
 {% endblock %}
