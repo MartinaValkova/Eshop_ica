@@ -3,6 +3,8 @@ from .models import Product, Order
 from django.core.paginator import Paginator
 from .forms import UserRegistrationForm
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_protect 
 
 
 # Create your views here.
@@ -31,9 +33,8 @@ def detail(request, id):
 
   
    # Checkout
-
-
 @login_required
+@csrf_protect
 def checkout(request):
 
     if request.method == "POST":
@@ -53,7 +54,7 @@ def checkout(request):
 
 # User registeration
 
-
+@csrf_protect
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
