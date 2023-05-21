@@ -15,6 +15,7 @@ from dotenv import load_dotenv
 import os
 import dj_database_url
 import environ
+from django.core.wsgi import get_wsgi_application
 
 env = environ.Env()
 environ.Env.read_env()
@@ -142,9 +143,9 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
