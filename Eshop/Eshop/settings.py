@@ -32,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -106,7 +106,7 @@ WSGI_APPLICATION = "Eshop.wsgi.application"
 
 DATABASES = {
 
-    'default': dj_database_url.parse(env('DATABASE_URL'))
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL')),
     
     }
 
@@ -144,7 +144,7 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 
