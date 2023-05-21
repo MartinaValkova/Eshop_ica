@@ -15,7 +15,8 @@ from dotenv import load_dotenv
 import os
 import dj_database_url
 import environ
-from django.core.wsgi import get_wsgi_application
+
+
 
 env = environ.Env()
 environ.Env.read_env()
@@ -34,8 +35,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
+DEBUG = 'RENDER' not in os.environ
 
 
 ALLOWED_HOSTS = ['*']
@@ -66,7 +67,7 @@ MIDDLEWARE = [
 ## X-XSS-Protection
 SECURE_BROWSER_XSS_FILTER = True
 
-SECURE_SSL_REDIRECT = False 
+ 
 
 
 ROOT_URLCONF = "Eshop.urls"
