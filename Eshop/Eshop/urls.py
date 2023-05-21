@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from shop import views
 from django.contrib.auth import views as auth_views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -29,7 +31,10 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('terms/', auth_views.LogoutView.as_view(template_name='shop/terms.html'), name='terms'),
     path('privacy/', auth_views.LogoutView.as_view(template_name='shop/privacy.html'), name='privacy'),
+   
 
 
 
 ]
+
+urlpatterns += staticfiles_urlpatterns()
