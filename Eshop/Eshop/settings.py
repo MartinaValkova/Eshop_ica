@@ -13,13 +13,13 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-import dj_database_url
-import environ
+#import dj_database_url
+#import environ
 
 
 
-env = environ.Env()
-environ.Env.read_env()
+#env = environ.Env()
+#environ.Env.read_env()
 
 load_dotenv()
 
@@ -37,12 +37,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = 'RENDER' not in os.environ
+DEBUG = True
 
 
-ALLOWED_HOSTS = []
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME: ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+ALLOWED_HOSTS = ['*']
 
 
 
@@ -68,7 +66,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+   
 ]
 
 ## X-XSS-Protection
@@ -104,21 +102,21 @@ WSGI_APPLICATION = "Eshop.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-#DATABASES = {
-    #"default": {
-      #  "ENGINE": "django.db.backends.sqlite3",
-      #  "NAME": BASE_DIR / "db.sqlite3",
-    #}
-#}
-
-
-# Render PostgreSQL database
-
 DATABASES = {
-
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL')),
-    
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
+}
+
+
+# Render PostgreSQL database LIVE
+
+#DATABASES = {
+
+   # 'default': dj_database_url.parse(os.environ.get('DATABASE_URL')),
+    
+   # }
 
 
 # Password validation
