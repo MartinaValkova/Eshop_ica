@@ -37,8 +37,10 @@
             </div>
         </div>
         <div class="mb-2">
-            <label ><input type="checkbox"> I understand and accept the<a style="color:blue;" href="{% url 'terms' %}"> Terms and Conditions</a></label>
-           
+            <div>
+                <label> {{ user_form.check }} I understand and accept the<a style="color:blue;" href="{% url 'terms' %}"> Terms and Conditions</a></label>
+            </div>
+
         </div>
         <div class="mb-2">
             <label ><input type="checkbox"> I accept the cookies and understand that they <br>will be used to boost performance of the website</br>
