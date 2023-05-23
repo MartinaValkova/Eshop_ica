@@ -6,6 +6,8 @@ class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Confirm password', widget=forms.PasswordInput)
+    check = forms.BooleanField(required = True)
+    email = forms.CharField(label='Email', widget=forms.EmailInput)
 
     class Meta:
         model = User
