@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+#Database for products done by Martina
 class Product(models.Model):
     
     def __str__(self):
@@ -13,6 +14,7 @@ class Product(models.Model):
     description = models.TextField()
     image = models.CharField(max_length=300)
 
+#Database for Order done by Martina
 
 class Order(models.Model):
     items = models.CharField(max_length=1000)

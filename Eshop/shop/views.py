@@ -12,19 +12,20 @@ from django.views.decorators.csrf import csrf_protect
 
 def index(request):
     product_objects = Product.objects.all()
-    # search code
+    # search code for the user to be able to search for product, done by Martina
     item_name = request.GET.get('item_name')
     if item_name != '' and item_name is not None:
         product_objects = product_objects.filter(title__icontains=item_name)
 
-    # paginator code
+    # paginator code done by Martina. Each page has 4 products.
     paginator = Paginator(product_objects, 4)
     page = request.GET.get('page')
     product_objects = paginator.get_page(page)
 
     return render(request, 'shop/index.html', {'product_objects': product_objects})
 
-    # Detail viex code
+    # Detail viex code, the user is able to see the detail view of the product,
+    # done by Martina
 
 
 def detail(request, id):
@@ -32,7 +33,10 @@ def detail(request, id):
     return render(request, 'shop/detail.html', {'product_object': product_object})
 
   
-   # Checkout
+   # Checkout code done by Martina,
+   # before the code there is a login_required decorator, 
+   # when user wants to checkout he needs to fist login.
+   # Another decorator is the csrf to protect
 @login_required
 @csrf_protect
 def checkout(request):
@@ -52,7 +56,7 @@ def checkout(request):
 
     return render(request, 'shop/checkout.html')
 
-# User registeration
+# User registration code done by Jovan
 
 @csrf_protect
 def register(request):
