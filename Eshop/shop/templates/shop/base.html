@@ -1,3 +1,7 @@
+<!-- Base template Maintain a consistent look and feel across all your web application's web pages.
+Achieve reusability where you can reuse the header, nav, footer, and other sections of your website code. ...
+Improve site performance by caching templates that have consistent code blocks across your website.-->
+
 <!DOCTYPE html>
 <html lang="en">
   {% load static %}
@@ -18,7 +22,7 @@
 <body>  
     
 
-<!--Creating the Navbar and displaying number of items on Navbar-->
+<!--Creating the Navbar and displaying number of items on Navbar done by Martina-->
 
 
 <div class="container">
@@ -71,9 +75,11 @@
 </body> 
 
 {% block js %} 
+
+
 <script type="text/javascript">
     console.log('This is working');
- 
+ //using local storage to add item in the cart done by Martina
     if(localStorage.getItem('cart')==null){
         var cart = {};
     }
@@ -106,7 +112,8 @@
         document.getElementById("cart").innerHTML = "Cart("+ Object.keys(cart).length +")";
        
     });
- 
+ //Java script code to display the cart done by Martina
+
     DisplayCart(cart);
     function DisplayCart(cart){
         var cartString ="";
@@ -165,7 +172,7 @@
 
 
  
-//code to delete item from cart
+//code to delete item from cart done by Martina
  
 $(document).on("click", ".dfc", function () {
       console.log("The delete from cart button is clicked");
