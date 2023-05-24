@@ -132,6 +132,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Django CSP configuration
+
+CSP_DEFAULT_SRC = ("'none'",)
+CSP_SCRIPT_SRC = ["https://stackpath.bootstrapcdn.com",
+    "https://cdn.jsdelivr.net",
+    "https://code.jquery.com"
+    ]
+
+CSP_STYLE_SRC = ["https://stackpath.bootstrapcdn.com"]
+CSP_IMG_SRC = ("'self'",)
+CSP_FRAME_SRC = ["https://docs.google.com"]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
