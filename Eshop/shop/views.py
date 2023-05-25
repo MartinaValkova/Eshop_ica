@@ -72,3 +72,8 @@ def register(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+
+@login_required
+def profile(request):
+    return render(request, 'shop/profile.html')

@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', views.index, name='index'),
@@ -33,4 +34,8 @@ urlpatterns = [
     path('terms/', auth_views.LogoutView.as_view(template_name='shop/terms.html'), name='terms'),
     path('privacy/', auth_views.LogoutView.as_view(template_name='shop/privacy.html'), name='privacy'),
     path('sales/', auth_views.LogoutView.as_view(template_name='shop/sales.html'), name='sales'),
+    path('profile/' , views.profile, name = 'profile'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
