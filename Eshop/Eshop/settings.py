@@ -37,7 +37,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*']
@@ -62,6 +62,11 @@ INSTALLED_APPS = [
     
 ]
 
+
+
+
+
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -74,6 +79,7 @@ MIDDLEWARE = [
    
 ]
 
+X_FRAME_OPTIONS = 'DENY'
 ## X-XSS-Protection
 SECURE_BROWSER_XSS_FILTER = True
 
@@ -86,7 +92,7 @@ ROOT_URLCONF = "Eshop.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ["templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -166,6 +172,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRT = [
+    BASE_DIR / 'static'
+]
 
 MEDIA_URL = '/media/'
 
