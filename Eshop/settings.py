@@ -15,6 +15,8 @@ from dotenv import load_dotenv
 import os
 import dj_database_url
 import environ
+import os.path  
+import sys
 
 
 
@@ -22,6 +24,8 @@ env = environ.Env()
 environ.Env.read_env()
 
 load_dotenv()
+
+PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +41,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['*']
@@ -176,6 +180,9 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRT = [
     BASE_DIR / 'static'
 ]
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
