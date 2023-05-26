@@ -13,13 +13,13 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-#import dj_database_url
-#import environ
+import dj_database_url
+import environ
 
 
 
-#env = environ.Env()
-#environ.Env.read_env()
+env = environ.Env()
+environ.Env.read_env()
 
 load_dotenv()
 
@@ -37,7 +37,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*']
@@ -62,6 +62,11 @@ INSTALLED_APPS = [
     
 ]
 
+
+
+
+
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -74,6 +79,7 @@ MIDDLEWARE = [
    
 ]
 
+X_FRAME_OPTIONS = 'DENY'
 ## X-XSS-Protection
 SECURE_BROWSER_XSS_FILTER = True
 
@@ -86,7 +92,7 @@ ROOT_URLCONF = "Eshop.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ["templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -107,24 +113,24 @@ WSGI_APPLICATION = "Eshop.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+#DATABASES = {
+    #"default": {
+       # "ENGINE": "django.db.backends.sqlite3",
+       # "NAME": BASE_DIR / "db.sqlite3",
+    #}
+#}
 
 
 # Render PostgreSQL database LIVE
 
-#DATABASES = {
+DATABASES = {
 
-   # 'default': dj_database_url.parse(os.environ.get('DATABASE_URL')),
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL')),
     
-   # }
+    }
 
 
-# Password validation
+ #Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -166,6 +172,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRT = [
+    BASE_DIR / 'static'
+]
 
 MEDIA_URL = '/media/'
 
