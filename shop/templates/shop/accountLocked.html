@@ -1,0 +1,31 @@
+{% extends 'shop/base.html' %}
+
+{% block body %}
+
+<!--Done by Martina - Managing brute force attacks - Code for a account locked page when user get locked out of his/her account due to multiple failed login attempts-->
+<br> <br>
+
+
+<div class="container bg-while shadow-md p-5 form-layout">
+
+    <div class="text-center">
+
+        <h4 class="text-uppercase"> Account locked</h4>
+
+        <br>
+
+        <p> You have been locked out of your account due to multiple failed login attempts </p>
+
+        <p> You may re-attempt to login to your account after the expire period. </p>
+
+        <br>
+
+
+        <a class="btn btn-info" type="button"  href="{%url 'index' %}"><i class="fa fa-user" aria-hidden="true"></i> &nbsp; Return to homepage </a>
+
+
+   </div>
+</div>
+  
+
+{% endblock %}

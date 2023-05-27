@@ -41,7 +41,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*']
@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "captcha",
+    'axes',
     
     
 ]
@@ -78,15 +79,59 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "axes.middleware.AxesMiddleware",
     
    
 ]
 
-X_FRAME_OPTIONS = 'DENY'
-## X-XSS-Protection
-SECURE_BROWSER_XSS_FILTER = True
+AUTHENTICATION_BACKENDS = [
+    # AxesStandaloneBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesStandaloneBackend',
+
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+#Settings for deployment
+
+# CSRF Protection
+
+CSRF_COOKIE_SECURE = True
 
 SESSION_COOKIE_SECURE = True
+
+
+# Protection against XSS attacks 
+SECURE_BROWSER_XSS_FILTER = True
+
+SECURE_CONTENCT_TYPE_NOSNIFF = True
+
+#Enable HSTS
+
+SECURE_HSTS_SECONDS = 86400
+
+SECURE_HSTS_PRELOAD = True
+
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+# Django CSP configuration
+
+CSP_DEFAULT_SRC = ("'none'",)
+CSP_SCRIPT_SRC = ["https://stackpath.bootstrapcdn.com",
+    "https://cdn.jsdelivr.net",
+    "https://code.jquery.com"
+    ]
+
+CSP_STYLE_SRC = ["https://stackpath.bootstrapcdn.com"]
+CSP_IMG_SRC = ("'self'",)
+CSP_FRAME_SRC = ["https://docs.google.com"]
+
+
+
+
+
+
+
 
 
 
@@ -94,10 +139,15 @@ SESSION_COOKIE_SECURE = True
 
 ROOT_URLCONF = "Eshop.urls"
 
+
+
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["templates"],
+        "DIRS": [os.path.join(BASE_DIR, 'templates'),
+                 os.path.join(BASE_DIR, 'shop', 'templates', 'shop'),
+                 ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -115,7 +165,7 @@ WSGI_APPLICATION = "Eshop.wsgi.application"
 
 
 
-# Database which were used in development
+# Database which was used in development
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 #DATABASES = {
@@ -126,7 +176,9 @@ WSGI_APPLICATION = "Eshop.wsgi.application"
 #}
 
 
-# Render PostgreSQL database LIVE
+
+
+# Render PostgreSQL database used for deployment
 
 DATABASES = {
 
@@ -148,17 +200,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Django CSP configuration
-
-CSP_DEFAULT_SRC = ("'none'",)
-CSP_SCRIPT_SRC = ["https://stackpath.bootstrapcdn.com",
-    "https://cdn.jsdelivr.net",
-    "https://code.jquery.com"
-    ]
-
-CSP_STYLE_SRC = ["https://stackpath.bootstrapcdn.com"]
-CSP_IMG_SRC = ("'self'",)
-CSP_FRAME_SRC = ["https://docs.google.com"]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -198,3 +239,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = 'index'
 
 LOGIN_URL = 'login'
+
+
+# axes configuration settings
+
+AXES_FAILURE_LIMIT:3 # How many times a user can fail login
+
+AXES_COOLOFF_TIME:1 # Wait 1 hours before attempting to login again
+
+AXES_RESET_ON_SUCCESS = True  # Reset failed login attempts
+
+AXES_LOCKOUT_TEMPLATE = 'accountLocked.html'
