@@ -48,16 +48,16 @@
             </label>
            
         </div>
-
+        {{ user_form.captcha }}
 
         <div>
         <button class="bg-green-500 text-balck px-4 py-2" type="submit">Create user</button>
         </div>
 
-
+       
     </form>
     <p class="m-10"> Already registered? <span> <a class="text-indigo-500" href="{% url 'login' %}">Click here</a> to login</p></span>
     </div>
 
-
+   
     {% endblock %}

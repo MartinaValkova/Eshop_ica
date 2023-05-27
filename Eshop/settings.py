@@ -58,13 +58,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "captcha",
     
     
 ]
 
 
-
-
+# reCAPTCHA keys
+RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
 
 
 MIDDLEWARE = [
@@ -83,6 +85,8 @@ MIDDLEWARE = [
 X_FRAME_OPTIONS = 'DENY'
 ## X-XSS-Protection
 SECURE_BROWSER_XSS_FILTER = True
+
+SESSION_COOKIE_SECURE = True
 
 
 
@@ -111,7 +115,7 @@ WSGI_APPLICATION = "Eshop.wsgi.application"
 
 
 
-# Database
+# Database which were used in development
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 #DATABASES = {
@@ -182,7 +186,7 @@ STATICFILES_DIRT = [
 
 MEDIA_URL = '/media/'
 
-#STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 
 
