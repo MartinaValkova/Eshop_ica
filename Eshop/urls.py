@@ -33,4 +33,5 @@ urlpatterns = [
     path('terms/', auth_views.LogoutView.as_view(template_name='shop/terms.html'), name='terms'),
     path('privacy/', auth_views.LogoutView.as_view(template_name='shop/privacy.html'), name='privacy'),
     path('sales/', auth_views.LogoutView.as_view(template_name='shop/sales.html'), name='sales'),
+    path('accountLocked/', views.accountLocked, name= 'accountLocked'),
 ]

@@ -72,3 +72,8 @@ def register(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+
+
+def accountLocked(request):
+    return render(request, 'accountLocked.html')
