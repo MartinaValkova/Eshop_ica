@@ -41,7 +41,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['*']
@@ -241,7 +241,7 @@ LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 
 
-# axes configuration settings
+# Brute force management - axes configuration settings
 
 AXES_FAILURE_LIMIT:3 # How many times a user can fail login
 
