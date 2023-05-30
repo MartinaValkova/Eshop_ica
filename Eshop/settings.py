@@ -17,6 +17,8 @@ import dj_database_url
 import environ
 import os.path  
 import sys
+from django.dispatch import Signal
+
 
 
 
@@ -62,6 +64,8 @@ INSTALLED_APPS = [
     'axes',
     
     
+    
+    
 ]
 
 
@@ -71,26 +75,22 @@ RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
 
 
 MIDDLEWARE = [
+    'csp.middleware.CSPMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",#Csrf Middleware is added
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "axes.middleware.AxesMiddleware",
     
+    
    
 ]
 
-AUTHENTICATION_BACKENDS = [
-    # AxesStandaloneBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
-    'axes.backends.AxesStandaloneBackend',
 
-    # Django ModelBackend is the default authentication backend.
-    'django.contrib.auth.backends.ModelBackend',
-]
 
 #Settings for deployment
 
@@ -114,24 +114,37 @@ SECURE_HSTS_PRELOAD = True
 
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
-# Django CSP configuration
+# Django CSP configuration NOT USED
 
-CSP_DEFAULT_SRC = ("'none'",)
-CSP_SCRIPT_SRC = ["https://stackpath.bootstrapcdn.com",
+#CSP_DEFAULT_SRC = ("'none'",)
+#CSP_SCRIPT_SRC = ["https://stackpath.bootstrapcdn.com",
+   #"https://cdn.jsdelivr.net",
+   ## "https://code.jquery.com"
+    #]
+
+#CSP_STYLE_SRC = ["https://stackpath.bootstrapcdn.com"]
+##CSP_IMG_SRC = ("'self'",)
+#CSP_FRAME_SRC = ["https://docs.google.com"]
+
+
+
+
+CSP_DEFAULT_SRC = ["'none'"]
+CSP_SCRIPT_SRC = [
+    "https://stackpath.bootstrapcdn.com",
     "https://cdn.jsdelivr.net",
     "https://code.jquery.com"
-    ]
-
+]
 CSP_STYLE_SRC = ["https://stackpath.bootstrapcdn.com"]
-CSP_IMG_SRC = ("'self'",)
+CSP_IMG_SRC = [
+    "'self'",
+    "https://www.googletagmanager.com",
+    "https://www.google-analytics.com"
+]
 CSP_FRAME_SRC = ["https://docs.google.com"]
-
-
-
-
-
-
-
+CSP_INCLUDE_NONCE_IN = ["script-src"]
+CSP_REPORT_URI = ["http://localhost:8000/fake-report-uri/"]
+CSP_REPORT_ONLY = True
 
 
 
@@ -241,12 +254,30 @@ LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 
 
+AUTHENTICATION_BACKENDS = [
+    # AxesStandaloneBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesStandaloneBackend',
+
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+
+
 # Brute force management - axes configuration settings
 
-AXES_FAILURE_LIMIT:3 # How many times a user can fail login
+AXES_ENABLED = True # Axes enabled
 
-AXES_COOLOFF_TIME:1 # Wait 1 hours before attempting to login again
+AXES_LOCK_OUT_AT_FAILURE = True # User will get lockout if fail login 
+
+AXES_FAILURE_LIMIT = 3 # How many times a user can fail login
+
+AXES_COOLOFF_TIME = 1 # Wait 1 hours before attempting to login again
 
 AXES_RESET_ON_SUCCESS = True  # Reset failed login attempts
 
+AXES_ONLY_USER_FAILURES = True #only user username
+
 AXES_LOCKOUT_TEMPLATE = 'accountLocked.html'
+
+AXES_BEHIND_REVERSE_PROXY = True
