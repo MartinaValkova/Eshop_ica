@@ -47,31 +47,25 @@ from django.test.testcases import TestCase
 class CsrfClient(Client):
     class _CookieRequest:
         def __init__(self, cookies):
-            # Initialize the _CookieRequest instance with the provided cookies
             if not '_csrf_cookie' in cookies:
-                # If '_csrf_cookie' is not present in cookies, set it to 'csrf-cookie'
                 cookies['_csrf_cookie'] = 'csrf-cookie'
             self.COOKIES = dict([
                 (key, cookies[key].value) for key in cookies
             ])
-            # Create a dictionary of cookies with key-value pairs
-
+    
     def post(self, path, data={}, content_type=MULTIPART_CONTENT,
-             follow=False, csrf='default', **extra):
-        # Customized POST request method
+        follow=False, csrf='default', **extra):
+        "Requests a response from the server using POST, auto-includes CSRF "
+        "token unless csrf=False or the _csrf_cookie has not yet been set."
         if csrf and content_type == MULTIPART_CONTENT \
-                and 'csrf_token' not in data:
-            # Check if CSRF protection is enabled and content_type is MULTIPART_CONTENT
-            # Also, check if 'csrf_token' is not already present in the data
+                and not data.has_key('csrf_token'):
             data['csrf_token'] = csrf_utils.new_csrf_token(
                 CsrfClient._CookieRequest(self.cookies), csrf
             )
-            # Generate a new CSRF token using the _CookieRequest instance and provided csrf value
         return super(CsrfClient, self).post(
             path, data, content_type=content_type, follow=follow, csrf=csrf,
             **extra
         )
-        # Call the parent class's post method with the modified parameters
     
 
 
