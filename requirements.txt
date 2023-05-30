@@ -12,3 +12,4 @@ whitenoise==6.4.0
 Pillow==9.5.0
 django-recaptcha==3.0.0
 django-axes==6.0.1
+django-csp

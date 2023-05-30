@@ -26,6 +26,7 @@ class Order(models.Model):
     region = models.CharField(max_length=200)
     total = models.CharField(max_length=200)
 
+# Database for Contact details done by Jeremy
 
 class Contact(models.Model):
     name = models.CharField(max_length=100)
