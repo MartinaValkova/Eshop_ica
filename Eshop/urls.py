@@ -34,4 +34,10 @@ urlpatterns = [
     path('privacy/', auth_views.LogoutView.as_view(template_name='shop/privacy.html'), name='privacy'),
     path('sales/', auth_views.LogoutView.as_view(template_name='shop/sales.html'), name='sales'),
     path('accountLocked/', views.accountLocked, name= 'accountLocked'),
+    path('profile/', views.profile, name='profile'),
 ]
+
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

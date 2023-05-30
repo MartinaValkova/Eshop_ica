@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Order
+from .models import Product, Order, Profile
 from .models import Contact
 
 
@@ -21,3 +21,4 @@ class ContactAdmin(admin.ModelAdmin):
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Contact, ContactAdmin)
+admin.site.register(Profile)

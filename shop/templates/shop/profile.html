@@ -1,0 +1,28 @@
+{% extends "shop/base.html" %}  <!-- Extends the base.html template -->
+
+{% load crispy_forms_tags %}  <!-- Loads the crispy forms template tags -->
+
+{% block body %}  <!-- Defines a block named "body" -->
+
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">  <!-- Displays the user's profile image -->
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>  <!-- Displays the username of the user -->
+          <p class="text-secondary">{{ user.email }}</p>  <!-- Displays the email of the user -->
+        </div>
+      </div>
+      <form method="POST" enctype="multipart/form-data">  <!-- Starts a form with method "POST" and enctype "multipart/form-data" -->
+          {% csrf_token %}  <!-- Adds a CSRF token to the form for security -->
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Profile Info</legend>  <!-- Displays a legend for the form -->
+              {{ u_form|crispy }}  <!-- Renders the UserUpdateForm using the crispy forms template filter -->
+              {{ p_form|crispy }}  <!-- Renders the ProfileUpdateForm using the crispy forms template filter -->
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Update</button>  <!-- Displays a submit button for updating the form -->
+          </div>
+      </form>
+    </div>
+
+{% endblock body %}  <!-- Ends the "body" block -->
