@@ -143,4 +143,6 @@ class SelfTest(TestCase):
         self.assertEqual(response.status_code, 200)
         # Assert that the response status code is 200 (successful)
         self.assertTemplateUsed(response, 'shop/login.html')
+
         # Assert that the response uses the 'shop/login.html' template
+
