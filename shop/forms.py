@@ -26,4 +26,3 @@ class UserRegistrationForm(forms.ModelForm):
             return self.cleaned_data['password2']
         
 
-           

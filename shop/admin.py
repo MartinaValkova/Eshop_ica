@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Product, Order
+from .models import Contact
 
 
 # Register your models here.
@@ -14,6 +15,9 @@ class ProductAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('items', 'name', 'email', 'address', 'city', 'zipcode', 'region', 'total' )
 
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'subject', 'message')
 
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Order, OrderAdmin)
+admin.site.register(Contact, ContactAdmin)
