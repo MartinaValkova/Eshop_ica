@@ -48,7 +48,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Application definition
 
@@ -62,7 +62,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "captcha",
     'axes',
-    
+    'crispy_forms',
+    'crispy_bootstrap4',
     
     
     
@@ -237,8 +238,9 @@ STATICFILES_DIRT = [
 ]
 
 
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
 
 
 
