@@ -5,12 +5,8 @@ from .forms import UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_protect 
-<<<<<<< HEAD
-from django.http import HttpResponse
-
-=======
 from .models import Contact
->>>>>>> main
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -85,6 +81,9 @@ def contact(request):
          query.save
 
      return render(request, 'contact.html')
+
+
+
 
 
 @csrf_protect
