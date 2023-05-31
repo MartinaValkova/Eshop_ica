@@ -15,7 +15,7 @@ from PIL import Image
 @csrf_protect
 def index(request):
     product_objects = Product.objects.all()
-# search code for the user to be able to search for product, done by Martina
+# search function for the user to be able to search for product, done by Martina
     item_name = request.GET.get('item_name')
     if item_name != '' and item_name is not None:
         product_objects = product_objects.filter(title__icontains=item_name)
@@ -36,7 +36,7 @@ def detail(request, id):
     return render(request, 'shop/detail.html', {'product_object': product_object})
 
   
-# Checkout code done by Martina,
+# Checkout function done by Martina,
 # before the code there is a login_required decorator, 
 # when user wants to checkout he needs to fist login.
 # Another decorator is the csrf to protect
@@ -59,7 +59,7 @@ def checkout(request):
 
     return render(request, 'shop/checkout.html')
 
-# User registration code done by Jovan
+# User registration function done by Jovan
 
 @csrf_protect
 def register(request):
@@ -72,6 +72,8 @@ def register(request):
     user_form = UserRegistrationForm()
     return render(request, 'shop/register.html', {'user_form': user_form})
 
+
+# Contact function done by Jeremy
 @csrf_protect
 def contact(request):
      if request.method == 'POST':
@@ -87,7 +89,8 @@ def contact(request):
 
 
 
-
+# Account locked fucntion done by Martina. This is part of the Brute force management,
+# when user get lockout due to the multiple failed login attempts, user will redirect to the accountLoged page
 @csrf_protect
 def accountLocked(request):
     return render(request, 'accountLocked.html')

@@ -1,4 +1,4 @@
-<!-- Base template Maintain a consistent look and feel across all your web application's web pages.
+<!-- Base template done by Martina, it maintain a consistent look and feel across all your web application's web pages.
 Achieve reusability where you can reuse the header, nav, footer, and other sections of your website code. ...
 Improve site performance by caching templates that have consistent code blocks across your website.-->
 
@@ -6,12 +6,12 @@ Improve site performance by caching templates that have consistent code blocks a
 <html lang="en">
   {% load static %}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link href="https://unpkg.com//tailwindcss@2.1.1/dist/tailwind.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link href="https://unpkg.com//tailwindcss@2.1.1/dist/tailwind.min.css" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.4.js"   integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="   crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>   
@@ -54,7 +54,7 @@ Improve site performance by caching templates that have consistent code blocks a
           </li> {% endcomment %}
         
          </ul>
-    
+    <!--When user is logged-in the blue register button change for the users username-->
     {% if user.is_authenticated %}
     <a class="text-white" href="/logout">Logout</a>
     <a class="btn btn-sm btn-outline-primary m-2"  href=" ">{{user.username|title}}</a>
@@ -62,11 +62,8 @@ Improve site performance by caching templates that have consistent code blocks a
     <a class="text-white" href="/login">Login</a>
     <a class="btn btn-sm btn-primary m-2"  href="/register">Register</a>
    {% endif %}
-
-  
-
-
-    </div>
+    
+  </div>
   </nav>       
 </div>
 
@@ -82,7 +79,7 @@ Improve site performance by caching templates that have consistent code blocks a
 
 {% block js %} 
 
-
+<!--Java script code for the shopping cart done by Martina-->
 <script type="text/javascript">
     console.log('This is working');
  //using local storage to add item in the cart done by Martina
@@ -164,12 +161,8 @@ Improve site performance by caching templates that have consistent code blocks a
  
      itemString = `  <li class="list-group-item d-flex justify-content-between align-items-center">${quantity} of ${name}<span class="badge badge-warning badge-pill">${price}</span></li>`;
      $('#item_list').append(itemString);
-
-
- 
  
 }
-
 
   totalPrice = ` <li class ="list-group-item d-flex justify-content-between align-items-center"><b>Your total CZK</b>${total}</li> `
   $('#total').val(total);
@@ -191,18 +184,18 @@ $(document).on("click", ".dfc", function () {
         cart[item_id][2] =
           cart[item_id][2] -
           parseFloat(document.getElementById("price" + item_id).innerHTML);
-          //check if count is zero and remove element if it is.
+//check if count is zero and remove element if it is.
           if(cart[item_id][0]===0){
             console.log('Count reached zero')
             delete cart[item_id]
  
-            //update the cart count on the button
+//update the cart count on the button
               localStorage.setItem("cart", JSON.stringify(cart));
       document.getElementById("cart").innerHTML =
         "Cart(" + Object.keys(cart).length + ")";
-            //update the cart count on the button
+//update the cart count on the button
           }
-          //check if count is zero and remove element if it is.
+//check if count is zero and remove element if it is.
  
  
       } 
@@ -211,8 +204,7 @@ $(document).on("click", ".dfc", function () {
       document.getElementById("cart").innerHTML =
         "Cart(" + Object.keys(cart).length + ")";
     });
- 
-    //code to delete item from cart
+ //code to delete item from cart
 
 </script>
 {% endblock %}
