@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile
 
 
 #captcha
@@ -27,20 +26,3 @@ class UserRegistrationForm(forms.ModelForm):
                 raise forms.ValidationError('Password fields do not match')
             return self.cleaned_data['password2']
         
-#forms for for user update
-class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
-    # Define an additional form field for email
-
-    class Meta:
-        model = User
-        # Specify the model associated with the form
-        fields = ['username', 'email']
-        # Specify the fields from the User model to include in the form
-
-class ProfileUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        # Specify the model associated with the form
-        fields = ['image']
-        # Specify the fields from the Profile model to include in the form
