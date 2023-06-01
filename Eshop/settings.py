@@ -43,7 +43,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['*']
@@ -114,20 +114,8 @@ SECURE_HSTS_PRELOAD = True
 
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
-# Django CSP configuration NOT USED
 
-#CSP_DEFAULT_SRC = ("'none'",)
-#CSP_SCRIPT_SRC = ["https://stackpath.bootstrapcdn.com",
-   #"https://cdn.jsdelivr.net",
-   ## "https://code.jquery.com"
-    #]
-
-#CSP_STYLE_SRC = ["https://stackpath.bootstrapcdn.com"]
-##CSP_IMG_SRC = ("'self'",)
-#CSP_FRAME_SRC = ["https://docs.google.com"]
-
-
-
+# Django CSP configuration
 
 CSP_DEFAULT_SRC = ["'none'"]
 CSP_SCRIPT_SRC = [
