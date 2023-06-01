@@ -9,48 +9,55 @@
     <form class="shadow-lg p-10" method="POST">
       {% csrf_token %}
      <div class="mb-2">
+        <!--Username Field -->
             <label >Username</label>
             <div class="border rounded py-2 px-2 mr-10">
                 {{ user_form.username }}
             </div>
         </div>
         <div class="mb-2">
+        <!--Username Email field -->    
             <label >Email</label>
             <div class="border rounded py-2 px-2 mr-10">
                 {{ user_form.email }}
             </div>
         </div>
         <div class="mb-2">
+        <!--Password field -->    
             <label >Password</label>
             <div class="border rounded py-2 px-2 mr-10">
                 {{ user_form.password }}
             </div>
         </div>
         <div class="mb-2">
+        <!--Confirm Password field -->    
             <label >Confirm Password</label>
             <div class="border rounded py-2 px-2 mr-10">
                 {{ user_form.password2 }}
             </div>
         </div>
         <div class="mb-2">
+        <!--Terms and Conditions checkbox with the link to redirect to Terms and Conditions page -->    
             <div>
                 <label> {{ user_form.check }} I understand and accept the<a style="color:blue;" href="{% url 'terms' %}"> Terms and Conditions</a></label>
             </div>
 
         </div>
         <div class="mb-2">
+        <!--Cookies field which are optional to be clicked, all previous fileds and checkboxes are mandatory -->    
             <label ><input type="checkbox"> I accept the cookies and understand that they <br>will be used to boost performance of the website</br>
                
             </label>
            
         </div>
+        <!--Captcha field which is also mandatory -->
         {{ user_form.captcha }}
-
+        <!--Create user button -->
         <div>
         <button class="bg-green-500 text-balck px-4 py-2" type="submit">Create user</button>
         </div>
 
-       
+    <!--Button underneath register form if you are already registered to redirect you to login page -->   
     </form>
     <p class="m-10"> Already registered? <span> <a class="text-indigo-500" href="{% url 'login' %}">Click here</a> to login</p></span>
     </div>
