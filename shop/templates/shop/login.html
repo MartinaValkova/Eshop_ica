@@ -1,25 +1,38 @@
+
 {% extends 'shop/base.html' %}<!-- Extends the base.html template -->
 {% block body %}
 
 <!--Login page done by Jeremy -->
+
+
+<!-- <div class="flex flex-col justify-center items-center min-h-screen"> -This element serves as a container with flexbox properties to center its contents both vertically and horizontally on the screen.
+     <form class="shadow-lg p-10" method="POST"> - adds a shadow effect to the form.
+     {% csrf_token %} -  token to protect against cross-site request forgery attacks. It ensures the form submission is secure.
+     <div class="mb-2"> - element adds a margin-bottom of 2 units to create spacing below the label and form field.
+-->
+
 <div class="flex flex-col justify-center items-center min-h-screen">
     <h1 class="font-weight-bold">Login 🔐</h1>
     <form class="shadow-lg p-10" method="POST">
         {% csrf_token %}
+        <!-- field for the username input -->
         <div class="mb-2">
             <label >Username</label>
             <div class="border rounded py-2 px-2 mr-10">
                 {{ form.username }}
             </div>
         </div>
+        <!-- field for the password input -->
         <div class="mb-2">
             <label >Password</label>
             <div class="border rounded py-2 px-2 mr-10">
                 {{ form.password }}
             </div>
         </div>
+        <!-- Button to Login to the website -->
         <button class="bg-green-500 text-black px-4 py-2" type="submit">Login</button>
     </form>
+                <!-- If you are not registered this page directs you to the register page -->
     <p class="m-10"> New to the website? <span> <a class="text-indigo-500" href="{% url 'register' %}">Click here</a> to register</p></span>
     
 
@@ -27,4 +40,3 @@
 
 
 {% endblock %}
-
