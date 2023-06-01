@@ -13,7 +13,6 @@ from django.utils.crypto import get_random_string
 
 
 #Test to check if the middleware are configured
-
 class MiddlewareTestCase(TestCase):
     def test_cache_middleware(self):
         with self.modify_settings(
@@ -68,8 +67,6 @@ class CsrfClient(Client):
             **extra
         )
     
-
-
 
 class ClickjackingTest(TestCase):
     def setUp(self):
