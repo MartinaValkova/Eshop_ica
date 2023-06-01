@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render
 from .models import Product, Order 
 from django.core.paginator import Paginator
@@ -7,10 +8,11 @@ from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_protect 
 from .models import Contact
 from django.http import HttpResponse
-
+from PIL import Image
 
 # Create your views here.
 
+#Index code done by Martina
 @csrf_protect
 def index(request):
     product_objects = Product.objects.all()
@@ -18,6 +20,7 @@ def index(request):
     item_name = request.GET.get('item_name')
     if item_name != '' and item_name is not None:
         product_objects = product_objects.filter(title__icontains=item_name)
+
 
 # paginator code done by Martina. Each page has 4 products.
     paginator = Paginator(product_objects, 4)
@@ -95,4 +98,4 @@ def accountLocked(request):
     return render(request, 'accountLocked.html')
 
 
-
+   
