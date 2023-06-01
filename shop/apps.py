@@ -7,8 +7,3 @@ class ShopConfig(AppConfig):
 
 
 
-class UsersConfig(AppConfig):
-    name = 'profile'
-
-    def ready(self):
-        import shop.signals

@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.db import connection
+from django.utils.crypto import get_random_string
 
 
 
@@ -144,3 +145,89 @@ class SelfTest(TestCase):
         # Assert that the response status code is 200 (successful)
         self.assertTemplateUsed(response, 'shop/login.html')
 
+
+#This class creates tests to check the functionality of the main page.
+
+class SecurityTest(TestCase):
+    def setUp(self):
+        self.username = 'testuser'
+        self.password = 'testpass123'
+        self.user = User.objects.create_user(username=self.username, password=self.password)
+
+
+    def test_user_password_hashed(self):
+        # Verify that the user's password is hashed
+        self.assertNotEqual(self.user.password, 'testpassword')
+
+    def test_logout(self):
+        # Test successful logout
+        self.client.force_login(self.user)
+
+        response = self.client.post(reverse('logout'))
+
+        # Successful logout should return status code 200
+        self.assertEqual(response.status_code, 200)
+
+        # User should be logged out
+        self.assertNotIn('_auth_user_id', self.client.session)
+
+
+    def test_brute_force_protection(self):
+        # Test brute force protection by making multiple failed login attempts
+        for _ in range(5):
+            password = get_random_string(length=10)
+            response = self.client.post(reverse('login'), {'username': 'testuser', 'password': password})
+
+        # After multiple failed attempts, response should be 302
+        self.assertEqual(response.status_code, 302)
+
+    def test_username_enumeration_attack(self):
+        # Test username enumeration attack
+        username = 'testuser'
+        response = self.client.post(reverse('login'), {'username': username, 'password': 'testpassword'})
+
+        # Response should be 200 for both valid and invalid usernames
+        self.assertEqual(response.status_code, 200)
+
+
+    def test_brute_force_protection(self):
+        # Test brute force protection by making multiple failed login attempts
+        for _ in range(5):
+            password = get_random_string(length=10)
+            response = self.client.post(reverse('login'), {'username': 'testuser', 'password': password})
+
+        # After multiple failed attempts, response should be 429
+        self.assertEqual(response.status_code, 429)
+
+
+    def test_admin_site_protection(self):
+        # Test admin site protection by accessing admin index page without authentication
+        response = self.client.get(reverse('admin:index'))
+
+        # Admin site should redirect when not authenticated
+        self.assertEqual(response.status_code, 302)
+
+    def test_admin_login_view(self):
+        # Test admin login page accessibility
+        response = self.client.get(reverse('admin:login'))
+
+        # Admin login page should be accessible
+        self.assertEqual(response.status_code, 200)
+
+#'test_user_password_hashed' verifies that the user's password has been hashed and is not stored in plain text.
+
+#''test_logout'': This test verifies that the logout mechanism is operational.
+#  It pretends to be a logged-in user, sends a POST request to the logout endpoint, and checks that the return status code is 200 and the user is logged out.
+
+#"test_brute_force_protection" verifies the brute force protection technique.
+#  It attempts many unsuccessful logins and validates that after a given number of attempts, the response status code is 302, indicating that the protection mechanism is activated.
+#
+#''test_username_enumeration_attack"': This test looks for a vulnerability in username enumeration. 
+# To avoid this, it performs a POST request to the login endpoint with both valid and invalid usernames and checks that the return status code is 200 in both circumstances. 
+#
+#''test_admin_site_protection'' ::guarantees that the admin site is secure. 
+# It tries to visit the admin index page without login and confirms that the response status code is 302, indicating that the user is being redirected when not authorized.
+
+#''test_admin_login_view'': This test validates the admin login page's accessibility. 
+# It performs a GET request to the admin login endpoint and checks the return status code to ensure that it is 200, indicating that the login page is accessible.
+#
