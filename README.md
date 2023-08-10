@@ -9,9 +9,9 @@ Project Description:
 
 Fully functional E-shop website. Right form listing products, searching them, adding them to the cart, and checkout we implement each and every feature from scratch.
 
-The website was deployed, to see it go to: https://eshop-uz89.onrender.com/
+The website was deployed on Render, to see it go to: https://eshop-uz89.onrender.com/, but the postgreSQL database will be suspended on the 17.08.23.
 
-Or you can run the Django development server by following the steps bellow.
+Or you can run the Django development server by following the steps bellow, but you will have to use the sqlite database which you can just uncomment it in the settings instead of the postreSQL one. 
 
 
 Requirements:
